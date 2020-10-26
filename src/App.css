@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+button {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 15px 0;
+  color: #fff;
+  font-size: 20px;
+  background: rgb(13, 103, 141);
+  cursor: pointer;
+}
+
+.login {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+.login .loginContainer {
+  padding: 60px;
+  margin: auto;
+  width: 100%;
+  max-width: 520px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: radial-gradient(
+    ellipse at left bottom,
+    rgb(0, 43, 61) 0%,
+    rgb(3, 62, 87) 59%,
+    rgb(13, 103, 141) 100%
+  );
+  box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+}
+
+.login .loginContainer label{
+  color: white;
+  margin: 20px 0 5px;
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.login .loginContainer input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 19px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.login .loginContainer .btnContainer {
+  width: 100%;
+  padding: 24px 0;
+}
+
+.login .loginContainer .btnContainer p {
+  margin: 14px 0 0 0;
+  text-align: right;
+  color: #fff;
+}
+
+.login .loginContainer .btnContainer p span {
+  color: yellow;
+  font-weight: 500;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.login .loginContainer .btnContainer {
+  color: white;
+}
+
+.login .loginContainer .errorMsg {
+  color: rgb(255, 52, 52);
+  font-size: 16px;
+}
+
+.loadingOverlay {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.Home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.Home nav {
+  background: rgb(13, 103, 141);
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Home nav h2 {
+  color: #fff;
+}
+
+.Home nav button {
+  width: 86px;
+  padding: 8px 0;
+  background: #005073;
+  font-size: 18px;
+}
+
+#fileUpload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+}
+
+#fileUpload button {
+  max-width: 450px;
+}
+
+#fileUpload p {
+  color: white;
+  padding: 10px;
+  margin: 20px;
+  border: 2px dashed white;
+  max-width: 450px;
+  min-width: 450px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
