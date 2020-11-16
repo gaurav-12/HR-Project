@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import firebase from './Firebase';
+import firebase from '../../Firebase';
 
-const Home = ({ handleLogout }) => {
+const UploadScreen = ({ handleLogout }) => {
     const [fileName, setFileName] = useState('Click to Add File');
     const [file, setFile] = useState({});
     const [uploading, setUploading] = useState(false);
@@ -69,4 +69,4 @@ const Home = ({ handleLogout }) => {
     );
 };
 
-export default Home;
+export default UploadScreen;

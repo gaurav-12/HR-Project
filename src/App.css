@@ -1,3 +1,12 @@
+:root {
+  --lightBlue: rgb(13, 103, 141);
+  --midBlue: rgb(0, 81, 115);
+  --bgBlue: rgb(3, 62, 87);
+  --errRed: rgb(255, 52, 52);
+  --bgBlack: rgb(20, 20, 20);
+  --yellow: rgb(255, 230, 0);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,17 +18,90 @@ button {
   border: none;
   outline: none;
   width: 100%;
-  padding: 15px 0;
+  padding: 15px;
   color: #fff;
   font-size: 20px;
-  background: rgb(13, 103, 141);
+  background: var(--lightBlue);
   cursor: pointer;
+}
+
+footer {
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+footer p {
+  opacity: 0.2;
+}
+
+footer h2 {
+  opacity: 0.5;
+}
+
+footer div {
+  flex: 1;
+}
+
+footer #socials {
+  text-align: center;
+  opacity: 0.5;
+}
+
+footer #socials ul {
+  list-style: none;
+}
+
+footer #socials li {
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+}
+
+footer #links {
+  float: right;
+  list-style-type: none;
+}
+
+footer #links li {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+footer #links li:hover {
+  text-decoration: underline;
+}
+
+.loadingRotation {
+  animation: rotationAnim 1s ease 0s infinite;
+}
+
+@keyframes rotationAnim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotationAnim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .login {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  z-index: 999;
 }
 
 .login .loginContainer {
@@ -31,16 +113,20 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: radial-gradient(
-    ellipse at left bottom,
-    rgb(0, 43, 61) 0%,
-    rgb(3, 62, 87) 59%,
-    rgb(13, 103, 141) 100%
-  );
-  box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+  background: var(--bgBlue);
 }
 
-.login .loginContainer label{
+.login #close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  width: fit-content;
+  align-self: flex-end;
+  background-color: transparent;
+}
+
+.login .loginContainer label {
   color: white;
   margin: 20px 0 5px;
   display: block;
@@ -55,7 +141,7 @@ button {
   font-size: 19px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: white;
 }
 
 .login .loginContainer .btnContainer {
@@ -66,7 +152,7 @@ button {
 .login .loginContainer .btnContainer p {
   margin: 14px 0 0 0;
   text-align: right;
-  color: #fff;
+  color: white;
 }
 
 .login .loginContainer .btnContainer p span {
@@ -81,16 +167,16 @@ button {
 }
 
 .login .loginContainer .errorMsg {
-  color: rgb(255, 52, 52);
+  color: var(--errRed);
   font-size: 16px;
 }
 
 .loadingOverlay {
-  position: absolute;
-  z-index: 99;
+  position: fixed;
+  z-index: 9999;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   align-items: center;
   justify-content: center;
@@ -104,8 +190,45 @@ button {
   min-height: 100vh;
 }
 
+.Home .sections {
+  height: 100vh;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 80px;
+  background-color: var(--lightBlue);
+}
+
+.Home .sections h2 {
+  font-size: 4.5vw;
+  line-height: 1;
+  padding-bottom: 20px;
+}
+
+.Home .sections p {
+  font-size: 1.5vw;
+}
+
+.Home .sections img {
+  width: 100%;
+}
+
+.Home .sections div {
+  flex: 1;
+  padding: 30px;
+}
+
+.Home .sections button {
+  background-color: var(--midBlue);
+  width: fit-content;
+  margin-top: 20px;
+}
+
 .Home nav {
-  background: rgb(13, 103, 141);
+  position: fixed;
+  background: var(--lightBlue);
   width: 100%;
   padding: 20px 40px;
   display: flex;
@@ -114,14 +237,32 @@ button {
 }
 
 .Home nav h2 {
-  color: #fff;
+  color: white;
 }
 
 .Home nav button {
   width: 86px;
   padding: 8px 0;
-  background: #005073;
+  background: var(--midBlue);
   font-size: 18px;
+  margin-right: 10px;
+}
+
+.Home #upFloatButton {
+  position: fixed;
+  z-index: 99;
+  bottom: 20px;
+  right: 20px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 100px;
+  background-color: var(--bgBlack);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 3px;
+}
+
+.Home #upFloatButton svg {
+  display: block;
 }
 
 #fileUpload {
