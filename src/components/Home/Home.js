@@ -54,7 +54,11 @@ const Home = () => {
   };
 
   const handleLogout = () => {
-    firebase.auth().signOut();
+    setIsLoading(true);
+    firebase.auth().signOut()
+    .then(() => {
+      setIsLoading(false);
+    });
   }
 
   const showDialog = (hasAccount) => {
@@ -149,7 +153,7 @@ const Home = () => {
 
         <div>
           <ul id="links">
-            <li>Home</li>
+            <li onClick={() => scrollToTop()}>Home</li>
             <li>Build Team</li>
             <li>Analyze Employee</li>
             <li>Join Program</li>

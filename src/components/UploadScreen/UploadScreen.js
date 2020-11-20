@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../Firebase';
+import { Loop } from '@material-ui/icons';
 
-const UploadScreen = ({ handleLogout }) => {
+const UploadScreen = () => {
     const [fileName, setFileName] = useState('Click to Add File');
     const [file, setFile] = useState({});
     const [uploading, setUploading] = useState(false);
 
-    const PROJECT_PARAMS = ['web design', 'mongodb', 'close deadline', 'ui/ux', 'flutter', 'some other', 'and any other'];
-
-    const getProjectParams = () => {
-        return PROJECT_PARAMS.map((value, i) => {
-            return (
-                <div>{value}</div>
-            );
-        });
+    const handleLogout = () => {
+        setUploading(true);
+        firebase.auth().signOut()
+            .then(() => {
+                setUploading(false);
+            });
     }
 
     const fileUploadButton = () => {
@@ -62,8 +61,8 @@ const UploadScreen = ({ handleLogout }) => {
                 </button>
             </div>
 
-            <div className="loadingOverlay" style={{display:    uploading? 'flex' : 'none'}}>
-                Uploading...
+            <div className="loadingOverlay" style={{ display: uploading ? 'flex' : 'none' }}>
+                <Loop style={{ fontSize: "15vh" }} className={uploading ? "loadingRotation" : null} />
             </div>
         </section>
     );
