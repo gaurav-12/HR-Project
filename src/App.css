@@ -11,16 +11,17 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 button {
   border: none;
   outline: none;
   width: 100%;
-  padding: 15px;
+  padding: 15px 20px;
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
+  text-transform: uppercase;
   background: var(--lightBlue);
   cursor: pointer;
 }
@@ -31,6 +32,7 @@ footer {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  background: black;
 }
 
 footer p {
@@ -65,13 +67,47 @@ footer #links {
   list-style-type: none;
 }
 
-footer #links li {
+footer #links li a {
   opacity: 0.5;
   cursor: pointer;
+  color: white;
+  text-decoration: none;
 }
 
 footer #links li:hover {
   text-decoration: underline;
+}
+
+#customSelect {
+  background-color: var(--midBlue);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#customSelect span {
+  padding-right: 10px;
+}
+
+#customSelectDropdown {
+  background-color: var(--bgBlack);
+  position: absolute;
+  z-index: 5;
+}
+
+#customSelectDropdownItem {
+  padding: 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#customSelectDropdownItem:hover {
+  color: white;
+  background-color: var(--midBlue);
 }
 
 .loadingRotation {
@@ -116,8 +152,8 @@ footer #links li:hover {
   background: var(--bgBlue);
 }
 
-.login #close {
-  position: absolute;
+.close {
+  position: fixed;
   top: 0;
   right: 0;
   padding: 20px;
@@ -144,26 +180,8 @@ footer #links li:hover {
   color: white;
 }
 
-.login .loginContainer .btnContainer {
-  width: 100%;
-  padding: 24px 0;
-}
-
-.login .loginContainer .btnContainer p {
-  margin: 14px 0 0 0;
-  text-align: right;
-  color: white;
-}
-
-.login .loginContainer .btnContainer p span {
-  color: yellow;
-  font-weight: 500;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-.login .loginContainer .btnContainer {
-  color: white;
+.login .loginContainer button {
+  margin-top: 30px;
 }
 
 .login .loginContainer .errorMsg {
@@ -234,21 +252,23 @@ footer #links li:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 9;
 }
 
-.Home nav h2 {
+.Home nav h2, .Home nav h2 a {
   color: white;
+  text-decoration: none;
 }
 
 .Home nav button {
-  width: 86px;
-  padding: 8px 0;
+  width: fit-content;
+  padding: 12px 15px;
   background: var(--midBlue);
-  font-size: 18px;
+  font-size: 15px;
   margin-right: 10px;
 }
 
-.Home #upFloatButton {
+.floatButton {
   position: fixed;
   z-index: 99;
   bottom: 20px;
@@ -261,8 +281,229 @@ footer #links li:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 3px;
 }
 
-.Home #upFloatButton svg {
+.floatButton svg {
   display: block;
+}
+
+#EmpFormSection #mainDiv {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#EmpFormSection nav {
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+#EmpFormSection #mainDiv #noQuestions {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  font-size: 1.5vw;
+}
+
+#EmpFormSection #mainDiv #noQuestions img {
+  height: 40vh;
+  margin-bottom: 20px;
+}
+
+#EmpFormSection #mainDiv #questionsDiv {
+  padding: 20px;
+  width: 60vw;
+  margin-top: 30px;
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv button {
+  flex: 0;
+  display: flex;
+  background-color: var(--bgBlue);
+  box-shadow: 2px 2px 2px black;
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv .questionContent {
+  background-color: var(--midBlue);
+  box-shadow: 2px 2px 2px black;
+  padding: 15px;
+  margin-right: 10px;
+  flex: 1
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv .questionContent p:nth-child(1) {
+  color: var(--yellow);
+  font-size: 12px;
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv .questionContent p:nth-child(2) {
+  font-size: 20px;
+  margin: 10px 0 20px;
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv .questionContent .questionOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: var(--lightBlue);
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv .questionContent .questionOption p {
+  color: white;
+  opacity: 0.7;
+  font-size: 18px;
+  flex: 1;
+}
+
+#EmpFormSection #mainDiv #questionsDiv .questionDiv .questionContent .questionOption div {
+  flex: 0;
+  padding: 5px;
+  display: flex;
+  opacity: 0.5;
+  background-color: var(--bgBlue);
+}
+
+#EmpFormSection #newQuestionContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion {
+  background-color: var(--lightBlue);
+  padding: 20px;
+  box-shadow: 2px 2px 3px black;
+  width: 60vw;
+  position: fixed;
+  overflow-y: scroll;
+  min-height: fit-content;
+  max-height: 80vh;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion button {
+  width: fit-content;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  background: var(--midBlue);
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion button span {
+  padding-right: 10px;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion #addQuestion {
+  margin-top: 20px;
+  background-color: var(--bgBlue);
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion input {
+  width: 100%;
+  background-color: var(--midBlue);
+  border: none;
+  font-size: 22px;
+  color: white;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion .questionProperty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--midBlue);
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion .questionProperty #requiredCheck {
+  background-color: var(--midBlue);
+  padding: 10px;
+  display: flex;
+  cursor: pointer;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion #questionOption {
+  background-color: var(--midBlue);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 10px;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion #questionOption input {
+  flex: 1;
+  padding: 10px;
+  margin: 5px;
+  font-size: 18px;
+}
+
+#EmpFormSection #newQuestionContainer #newQuestion #questionOption button {
+  flex: 0;
+  background: var(--bgBlue);
+  display: flex;
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+  font-size: 14px;
+}
+
+#FourOFourSection #mainDiv {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#FourOFourSection #mainDiv img {
+  width: 50%;
+}
+
+#FourOFourSection p {
+  font-size: 3vh;
+  margin-top: 30px;
+  opacity: 0.5;
+}
+
+#FourOFourSection a {
+  text-decoration: none;
+}
+
+#FourOFourSection button {
+  background-color: transparent;
+  border: 2px solid white;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #fileUpload {

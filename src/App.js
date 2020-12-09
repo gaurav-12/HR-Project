@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './App.css';
+import EmployeeFormPage from './components/EmployeeFormPage/EmployeeFormPage';
+import FourOFourPage from './components/FourOFourPage/FourOFourPage';
 import Home from './components/Home/Home';
-import UploadScreen from './components/UploadScreen/UploadScreen';
 import firebase from './Firebase';
 
 const App = () => {
@@ -22,9 +24,23 @@ const App = () => {
   });
 
   return (
-    <div className="App">
-      {user ? <UploadScreen /> : <Home />}
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+
+          <Route path="/employee-form">
+            <EmployeeFormPage user={user} />
+          </Route>
+
+          <Route path="*">
+            <FourOFourPage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

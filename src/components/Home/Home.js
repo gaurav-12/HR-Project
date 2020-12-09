@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import firebase from './../../Firebase';
 import LoginSignup from '../LoginSignup/LoginSignup';
 import Module from './Module';
@@ -8,14 +7,17 @@ import teamImg from './../../assets/team.svg';
 import effectiveTeamImg from './../../assets/effective_team.svg';
 import analyzeImg from './../../assets/analyze.svg';
 import trainingImg from './../../assets/training.svg';
-import { ArrowUpward, Email, Facebook, LinkedIn, Loop, Twitter } from '@material-ui/icons';
+import { ArrowUpward } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import FooterComponent from '../FooterComponent/FooterComponent';
+import LoadingOverlayComp from '../LoadingOverlayComp/LoadingOverlayComp';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
-  const [hasAccount, setHasAccount] = useState(false);
   const [showHeadLogo, setShowHeadLogo] = useState(false);
   const [user, setUser] = useState('');
+  const [userType, setUserType] = useState(null);
 
   let firstSection = React.createRef();
 
@@ -56,15 +58,16 @@ const Home = () => {
   const handleLogout = () => {
     setIsLoading(true);
     firebase.auth().signOut()
-    .then(() => {
-      setIsLoading(false);
-    });
+      .then(() => {
+        setIsLoading(false);
+      });
   }
 
-  const showDialog = (hasAccount) => {
-    setHasAccount(hasAccount);
-    setShowLoginDialog(true);
-    document.body.style.overflowY = "hidden";
+  const showDialog = () => {
+    if (!user) {
+      setShowLoginDialog(true);
+      document.body.style.overflowY = "hidden";
+    }
   }
 
   const hideDialog = () => {
@@ -74,7 +77,7 @@ const Home = () => {
 
   const getModules = () => {
     return (
-      modules.map((m, i) => <Module module={m} showDialog={showDialog} index={i} key={i} />)
+      modules.map((m, i) => <Module module={m} showDialog={showDialog} index={i} key={i} userType={userType} />)
     )
   }
 
@@ -82,15 +85,29 @@ const Home = () => {
     firstSection.current.scrollIntoView();
   }
 
+  const getUserType = async (uid = null) => {
+    if (user) {
+      const userDoc = await firebase.firestore().collection('users').doc(uid ? uid : user.uid).get();
+      if (userDoc.exists)
+        setUserType(userDoc.get('USER_TYPE'));
+    }
+  }
+
+  const onScroll = (e) => {
+    if (window.scrollY > 300)
+      setShowHeadLogo(true);
+    else
+      setShowHeadLogo(false);
+  }
+
   useEffect(() => {
     authListener();
+    window.addEventListener("scroll", onScroll);
+    getUserType();
 
-    window.addEventListener("scroll", (e) => {
-      if (window.scrollY > 300)
-        setShowHeadLogo(true);
-      else
-        setShowHeadLogo(false);
-    });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    }
   });
 
   return (
@@ -99,11 +116,15 @@ const Home = () => {
         <h2 style={{ opacity: showHeadLogo ? 1 : 0 }}>TeamQ</h2>
         {
           user ?
-            <button onClick={() => handleLogout()}>Logout</button> :
             <div>
-              <button onClick={() => showDialog(true)}>Sign In</button>
-              <button onClick={() => showDialog(false)}>Sign Up</button>
-            </div>
+              <button onClick={() => handleLogout()}>Logout</button>
+              <Link to="/employee-form">
+                <button>
+                  {userType === "HR" ? "Employee Form" : "Edit Form"}
+                </button>
+              </Link>
+            </div> :
+            <button onClick={() => showDialog()}>Sign In</button>
         }
       </nav>
 
@@ -117,13 +138,13 @@ const Home = () => {
             Subscribe to Training Programs.
           </p>
 
-          <button onClick={() => showDialog(false)}>
+          <button onClick={() => showDialog()} hidden={user}>
             Get Started
           </button>
         </div>
 
         <div>
-          <img src={teamImg} />
+          <img src={teamImg} alt="TeamQ" />
         </div>
       </section>
 
@@ -131,42 +152,17 @@ const Home = () => {
       {getModules()}
 
       {/* Back to top FAB */}
-      <button id="upFloatButton" style={{ display: showHeadLogo ? 'block' : 'none' }}
+      <button className="floatButton" style={{ display: showHeadLogo ? 'block' : 'none' }}
         onClick={() => scrollToTop()}>
         <ArrowUpward fontSize="large" />
       </button>
 
-      <footer>
-        <div>
-          <h2>TeamQ</h2>
-          <p>© 2020 All rights reserved</p>
-        </div>
+      <FooterComponent />
 
-        <div id="socials">
-          <ul>
-            <li><Twitter /></li>
-            <li><Facebook /></li>
-            <li><LinkedIn /></li>
-            <li><Email /></li>
-          </ul>
-        </div>
+      <LoginSignup showDialog={showLoginDialog} hideDialog={hideDialog}
+        setIsLoading={setIsLoading} getUserType={getUserType} />
 
-        <div>
-          <ul id="links">
-            <li onClick={() => scrollToTop()}>Home</li>
-            <li>Build Team</li>
-            <li>Analyze Employee</li>
-            <li>Join Program</li>
-          </ul>
-        </div>
-      </footer>
-
-      <LoginSignup showDialog={showLoginDialog} hideDialog={hideDialog} hasAccount={hasAccount}
-        setHasAccount={setHasAccount} setIsLoading={setIsLoading} />
-
-      <div className="loadingOverlay" style={{ display: isLoading ? 'flex' : 'none' }}>
-        <Loop style={{ fontSize: "15vh" }} className={isLoading ? "loadingRotation" : null} />
-      </div>
+      <LoadingOverlayComp isLoading={isLoading} />
     </section>
   )
 };
